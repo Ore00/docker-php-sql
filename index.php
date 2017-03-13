@@ -17,7 +17,7 @@
 
     <?php
 
-    $conn = mysqli_connect('db', 'user', 'merde', "myDb");
+    $conn = mysqli_connect('db', 'user', 'test', "myDb");
 
 
     $query = 'SELECT * From Person';
