@@ -17,8 +17,6 @@
 
     <?php
 
-    // Connexion et sélection de la base
-    //$conn = mysqli_connect('172.19.0.2', 'user', 'merde', "myDb");
     $conn = mysqli_connect('db', 'user', 'merde', "myDb");
 
 
@@ -38,7 +36,6 @@
     }
     echo '</table>';
 
-    /* Libération du jeu de résultats */
     $result->close();
 
     mysqli_close($conn);
