@@ -7,3 +7,4 @@ Create this directories structure:
 ├── sessions
 └── www
     └── index.php
+    
