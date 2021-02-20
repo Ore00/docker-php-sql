@@ -1,17 +1,24 @@
 version: "2"
 services:
-    www:
+    app:
         build: .
+        container_name: php.test
+        hostname: php.test
         ports: 
             - "8001:80"
         volumes:
             - ./www:/var/www/html/
         links:
             - db
+            - maildev:maildev
         networks:
-            - default
+            backend-tier:
+                aliases: 
+                    - php.test
     db:
         image: mysql
+        container_name: mysql-db
+        hostname: mysql-db
         command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
         ports: 
             - "3306:3306"
@@ -24,9 +31,12 @@ services:
             - ./dump:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
-            - default
+            backend-tier:
+                aliases: 
+                    - db
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
         links: 
             - db:db
         ports:
@@ -35,5 +45,22 @@ services:
             MYSQL_USER: user
             MYSQL_PASSWORD: test
             MYSQL_ROOT_PASSWORD: test
+        networks:
+            backend-tier:
+              aliases:
+                - phpmyadmin
+    maildev:
+        image: djfarrelly/maildev
+        container_name: maildev
+        ports:
+            - 25
+            - 8282:80
+        networks:
+            backend-tier:
+              aliases:
+                - maildev
 volumes:
     persistent:
+networks:
+  backend-tier:
+    driver: bridge
