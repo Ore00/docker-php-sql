@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS myDb;
+USE myDb;
+
 -- put in ./dump directory 
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
