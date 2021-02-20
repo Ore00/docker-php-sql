@@ -11,7 +11,7 @@ RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer pcntl
 
 # set up sendmail config, see http://linux.die.net/man/5/ssmtp.conf for options
 RUN echo "hostname=php.test" > /etc/ssmtp/ssmtp.conf
-RUN echo "root=linda.mcgraw.com" >> /etc/ssmtp/ssmtp.conf
+RUN echo "root=linda.mcgraw@me.com" >> /etc/ssmtp/ssmtp.conf
 RUN echo "mailhub=maildev" >> /etc/ssmtp/ssmtp.conf
 
 # Set up php sendmail config
